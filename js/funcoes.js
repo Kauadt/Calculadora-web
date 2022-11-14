@@ -18,7 +18,7 @@ function potentiation(){
     base = document.getElementById("base").value;
     expoente = document.getElementById("expoente").value;
 
-    operation = eval(Math.pow((base), (expoente)));
+    operation = eval(Math.pow(parseFloat(base), parseFloat(expoente)));
     document.getElementById("resulpoten").innerHTML = operation;
 }
 
@@ -29,7 +29,7 @@ function rooting(){
     radicando = document.getElementById("radicando").value;
     index = document.getElementById("index").value;
 
-    operation = eval(Math.sqrt((radicando), (index)));
+    operation = eval(Math.sqrt(parseFloat(radicando), parseFloat(index)));
     document.getElementById("resulraiz").innerHTML = operation;
 }
 
@@ -49,31 +49,25 @@ function rooting(){
 // Fórmula quadratica
 
 
-    function QuadraticFormula(){
-        avalue = document.getElementById("avalue").value;
-        bvalue = document.getElementById("bvalue").value;
-        cvalue = document.getElementById("cvalue").value;
-         delta = "Δ = " + eval(Math.pow(parseFloat(bvalue), 2)  - (4 * parseFloat(avalue) * parseFloat(cvalue)));
+function QuadraticFormula(){
+    avalue = document.getElementById("avalue").value;
+    bvalue = document.getElementById("bvalue").value;
+    cvalue = document.getElementById("cvalue").value;
+    delta = eval(Math.pow(parseFloat(bvalue), 2) - 4 * parseFloat(avalue) * parseFloat(cvalue));
+    x1 = eval((- parseFloat(bvalue) + Math.sqrt(parseFloat(delta))) / (2 * parseFloat(avalue)));
+    x2 = eval((- parseFloat(bvalue) - Math.sqrt(parseFloat(delta))) / (2 * parseFloat(avalue)));
 
-
-        x1 = "X1: " + eval(parseFloat((-bvalue + Math.sqrt(delta)) / (2 * avalue)));
-        x2 = "X2: " + eval(parseFloat((-bvalue - Math.sqrt(delta)) / (2 * avalue)));               
-        document.getElementById("resuldelta").innerHTML = delta;
-        document.getElementById("resulx").innerHTML = x1;
-        document.getElementById("resulxx").innerHTML = x2; 
-
-        // Ajustar, incompleto.
+    if(delta == 0){
+        resultado = "X = " + x1;
+    }
+    else if(delta < 0){
+        resultado = "Delta negativo. Não existe raízes reais";
+    }
+    else{
+        resultado = "S = {" + x1 + ", " + x2 + "}";
     }
 
-
-
-
-/* Funcionalidades: 
- - 4 operações básicas OK
- - Potencia OK
- - Raiz OK
- - Área de um triangulo retangulo OK
- - Formula quadratica ... 
- - Formatar css 85%
- - Bootstrap OK
-*/
+    document.getElementById("resuldelta").innerHTML = "Δ = " + delta
+    document.getElementById("resultado").innerHTML = resultado
+    
+}
